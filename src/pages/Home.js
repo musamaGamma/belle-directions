@@ -33,9 +33,10 @@ export const Home = () => {
   const handleClick = () => {
     if (window.ReactNativeWebView) {
       // ensure window.ReactNativeWebView is there, otherwise, web app might crash if is not there
-      window.ReactNativeWebView.postMessage("Wayne is coming again", location);
     }
-    window.postMessage("hello", location);
+    window.ReactNativeWebView.postMessage(
+      JSON.stringify({ location, message: "helllo  world" })
+    );
   };
   return (
     <div>
@@ -48,6 +49,7 @@ export const Home = () => {
       />
 
       <Button
+        id="location"
         className="absolute !capitalize !font-bold   bottom-24 z-[999999] left-[%50]"
         variant="contained"
         onClick={handleClick}>
