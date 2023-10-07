@@ -7,8 +7,8 @@ import {
   useMapEvents,
 } from "react-leaflet";
 
-const Map = ({ setUserRefusal }) => {
-  const [location, setLocation] = useState(null);
+const Map = ({ setUserRefusal, location, setLocation }) => {
+  // const [location, setLocation] = useState(null);
 
   const [pickUpLocation, setPickUpLocation] = useState(null);
 
