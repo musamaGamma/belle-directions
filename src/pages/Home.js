@@ -38,9 +38,7 @@ export const Home = () => {
   };
   return (
     <div>
-      <Paper>
-        <PlacesAutoComplete />
-      </Paper>
+      <Paper>{/* <PlacesAutoComplete /> */}</Paper>
       <PlaceMap
         location={location}
         zoomControl={false}
@@ -48,10 +46,13 @@ export const Home = () => {
         setUserRefusal={setUserRefusal}
       />
 
-      <Button variant="contained" onClick={handleClick}>
+      <Button
+        className="absolute !capitalize !font-bold   bottom-24 z-[999999] left-[%50]"
+        variant="contained"
+        onClick={handleClick}>
         confirm location
       </Button>
     </div>
   );
 };
-//  rm  -rf .git
+//  npm start
