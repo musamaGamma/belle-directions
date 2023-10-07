@@ -35,6 +35,7 @@ export const Home = () => {
       // ensure window.ReactNativeWebView is there, otherwise, web app might crash if is not there
       window.ReactNativeWebView.postMessage("Wayne is coming again", location);
     }
+    window.postMessage("hello", location);
   };
   return (
     <div>
