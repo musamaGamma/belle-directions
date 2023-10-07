@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Map from "../Map";
-import { Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 import PlacesAutoComplete from "../components/PlacesAutoComplete";
 import axios from "axios";
 import PlaceMap from "../Map";
@@ -10,7 +10,7 @@ export const Home = () => {
   const [userRefusal, setUserRefusal] = useState();
   const [query, setQuery] = useState("");
   const [places, setPlaces] = useState([]);
-  const [confirm,setConfrim]=useState(false)
+  const [confirm, setConfrim] = useState(false);
 
   useEffect(() => {
     // window.ReactNativeWebView.postMessage("hello world from directions api");
@@ -29,6 +29,13 @@ export const Home = () => {
 
     fetchLocations();
   }, [query]);
+
+  const handleClick = () => {
+    if (window.ReactNativeWebView) {
+      // ensure window.ReactNativeWebView is there, otherwise, web app might crash if is not there
+      window.ReactNativeWebView.postMessage("Wayne is coming again", location);
+    }
+  };
   return (
     <div>
       <Paper>
@@ -40,7 +47,11 @@ export const Home = () => {
         setLocation={setLocation}
         setUserRefusal={setUserRefusal}
       />
-     
+
+      <Button variant="contained" onClick={handleClick}>
+        confirm location
+      </Button>
     </div>
   );
 };
+//  rm  -rf .git
