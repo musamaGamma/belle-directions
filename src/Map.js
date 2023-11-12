@@ -7,12 +7,10 @@ import {
   useMapEvents,
 } from "react-leaflet";
 
-const Map = ({ setUserRefusal, location, setLocation }) => {
+const Map = ({ setUserRefusal, location, setLocation, setLoading }) => {
   // const [location, setLocation] = useState(null);
 
   const [pickUpLocation, setPickUpLocation] = useState(null);
-
-  const [loading, setLoading] = useState(true);
 
   const markerRef = useRef();
   const eventHandlers = useMemo(
@@ -48,6 +46,7 @@ const Map = ({ setUserRefusal, location, setLocation }) => {
       <MapContainer
         className="min-h-screen w-full"
         center={location}
+        whenReady={() => setLoading(false)}
         zoom={13}
         scrollWheelZoom={false}>
         <TileLayer
@@ -57,6 +56,7 @@ const Map = ({ setUserRefusal, location, setLocation }) => {
         <Marker
           ref={markerRef}
           draggable={true}
+          className="h-[100px]"
           eventHandlers={eventHandlers}
           position={location}>
           <Popup>your salon location</Popup>
