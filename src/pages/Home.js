@@ -4,6 +4,7 @@ import { Button, CircularProgress, Paper } from "@mui/material";
 import PlacesAutoComplete from "../components/PlacesAutoComplete";
 import axios from "axios";
 import PlaceMap from "../Map";
+import { useSearchParams } from "react-router-dom";
 
 export const Home = () => {
   const [loading, setLoading] = useState(true);
@@ -39,6 +40,8 @@ export const Home = () => {
       JSON.stringify({ location, clicked: true })
     );
   };
+
+  const [searchParams, setSearchParams] = useSearchParams();
   return (
     <div>
       <Paper>{/* <PlacesAutoComplete /> */}</Paper>
@@ -63,13 +66,15 @@ export const Home = () => {
         ""
       )}
 
-      <Button
-        id="location"
-        className="absolute !capitalize !font-bold  !bg-black h-[48px]   bottom-24 z-[999999] left-[%50]"
-        variant="contained"
-        onClick={handleClick}>
-        confirm location
-      </Button>
+      {!searchParams.get("longitude") && (
+        <Button
+          id="location"
+          className="absolute !capitalize !font-bold  !bg-black h-[48px]   bottom-24 z-[999999] left-[%50]"
+          variant="contained"
+          onClick={handleClick}>
+          confirm location
+        </Button>
+      )}
     </div>
   );
 };

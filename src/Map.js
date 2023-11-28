@@ -6,6 +6,7 @@ import {
   TileLayer,
   useMapEvents,
 } from "react-leaflet";
+import { useSearchParams } from "react-router-dom";
 
 const Map = ({ setUserRefusal, location, setLocation, setLoading }) => {
   // const [location, setLocation] = useState(null);
@@ -28,17 +29,27 @@ const Map = ({ setUserRefusal, location, setLocation, setLoading }) => {
     []
   );
 
+  const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams.get("lngf"));
+
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLocation({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
-      },
-      (error) => setUserRefusal("you must allow location to continue"),
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
-    );
+    if (searchParams.get("latitude")) {
+      setLocation({
+        lat: searchParams.get("latitude"),
+        lng: searchParams.get("longitude"),
+      });
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        (error) => setUserRefusal("you must allow location to continue"),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+      );
+    }
   }, []);
   console.log({ location });
   return (
